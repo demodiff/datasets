@@ -1,0 +1,30 @@
+name: datasets
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch: {}
+  push: {}
+
+jobs:
+  data:
+    runs-on: ubuntu-latest
+    container: ghcr.io/investigativedata/investigraph:main
+    env:
+      DEBUG: true
+    strategy:
+      matrix:
+        dataset:
+          - dd-ger-berlin
+          - dd-ger-dresden
+    steps:
+      - name: parse and write the dataset
+        run: "investigraph run -d ${{ matrix.dataset }} -b local-file-system/datasets"
+
+  catalog:
+    needs: data
+    runs-on: ubuntu-latest
+    container: ghcr.io/investigativedata/investigraph:main
+    steps:
+      - name: Update the catalog
+        run: "investigraph build-catalog /data/catalog.yml -u data/catalog.json"

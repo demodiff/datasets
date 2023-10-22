@@ -1,0 +1,3 @@
+datasets:
+  - uri: https://data.demodiff.de/dd-ger-berlin/index.json
+  - uri: https://data.demodiff.de/dd-ger-dresden/index.json
