@@ -14,4 +14,4 @@ jobs:
       DEBUG: true
     steps:
       - name: parse and write dd-ger-berlin
-        run: "investigraph run -c datasets/dd-ger-berlin/config.yml "
+        run: "investigraph run -c dd-ger-berlin/config.yml "
