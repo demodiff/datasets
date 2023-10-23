@@ -12,19 +12,6 @@ jobs:
     container: ghcr.io/investigativedata/investigraph:main
     env:
       DEBUG: true
-    strategy:
-      matrix:
-        dataset:
-          - dd-ger-berlin
-          #  - dd-ger-dresden
     steps:
-      - name: parse and write the dataset
-        run: "investigraph run -d ${{ matrix.dataset }}"
-
-#  catalog:
-#    needs: data
-#    runs-on: ubuntu-latest
-#    container: ghcr.io/investigativedata/investigraph:main
-#    steps:
-#      - name: Update the catalog
-#        run: "investigraph build-catalog /data/catalog.yml -u data/catalog.json"
+      - name: parse and write dd-ger-berlin
+        run: "investigraph run -c datasets/dd-ger-berlin/config.yml "
